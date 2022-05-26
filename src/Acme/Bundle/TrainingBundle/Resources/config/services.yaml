@@ -1,0 +1,6 @@
+services:
+  _defaults:
+    autowire: true
+
+#  Acme\Bundle\TrainingBundle\Provider\TrainingProviderDecorator:
+#    decorates: Oro\Bundle\Loca
