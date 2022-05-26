@@ -2,5 +2,19 @@ services:
   _defaults:
     autowire: true
 
-#  Acme\Bundle\TrainingBundle\Provider\TrainingProviderDecorator:
-#    decorates: Oro\Bundle\Loca
+  Acme\Bundle\TrainingBundle\Provider\TrainingUserNameProviderDecorator:
+    decorates: Oro\Bundle\LocaleBundle\Provider\EntityNameProvider
+    arguments:
+      - '@Acme\Bundle\TrainingBundle\Provider\TrainingUserNameProviderDecorator.inner'
+    tags:
+      - { name: oro_entity.name_provider, priority: -60 }
+
+  Acme\Bundle\TrainingBundle\EventListener\UserViewListener:
+    tags:
+      - { name: kernel.event_listener, event: oro_ui.scroll_data.before.userView, method: onUserView }
+
+  Acme\Bundle\TrainingBundle\Twig\Extension\UserNameExtension:
+    tags:
+      - { name: twig.extension }
+
+  Oro\Bundle\LocaleBundle\Provider\EntityNameProvider: '@oro_locale.entity_name_provider'
