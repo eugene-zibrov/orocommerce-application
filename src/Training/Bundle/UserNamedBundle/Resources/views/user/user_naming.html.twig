@@ -1,0 +1,8 @@
+{% import '@OroUI/macros.html.twig' as UI %}
+
+{{ UI.renderProperty('training.user.full_name'|trans, entity|oro_format_full_name ) }}
+{{ UI.renderProperty('oro.user.name_prefix.label'|trans, entity.namePrefix ) }}
+{{ UI.renderProperty('oro.address.first_name.label'|trans, entity.firstName ) }}
+{{ UI.renderProperty('oro.address.middle_name.label'|trans, entity.middleName ) }}
+{{ UI.renderProperty('oro.address.last_name.label'|trans, entity.lastName ) }}
+{{ UI.renderProperty('oro.address.name_suffix.label'|trans, entity.nameSuffix ) }}
