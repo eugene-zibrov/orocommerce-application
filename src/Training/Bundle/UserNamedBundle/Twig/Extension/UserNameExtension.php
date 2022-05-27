@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Bundle\TrainingBundle\Twig\Extension;
+namespace Training\Bundle\UserNamedBundle\Twig\Extension;
 
 use Oro\Bundle\UserBundle\Entity\User;
 use Twig\Extension\AbstractExtension;

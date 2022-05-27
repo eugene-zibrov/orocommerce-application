@@ -1,17 +1,17 @@
 <?php
 
-namespace Acme\Bundle\TrainingBundle;
+namespace Training\Bundle\UserNamedBundle;
 
-use Acme\Bundle\TrainingBundle\DependencyInjection\AcmeTrainingBundleExtension;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Training\Bundle\UserNamedBundle\DependencyInjection\UserNamedBundleExtension;
 
-class AcmeTrainingBundle extends Bundle
+class UserNamedBundle extends Bundle
 {
     public function getContainerExtension(): ExtensionInterface
     {
         if (null === $this->extension) {
-            $this->extension = new AcmeTrainingBundleExtension();
+            $this->extension = new UserNamedBundleExtension();
         }
         return $this->extension;
     }

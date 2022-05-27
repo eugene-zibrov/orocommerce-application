@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\Bundle\TrainingBundle\EventListener;
+namespace Training\Bundle\UserNamedBundle\EventListener;
 
 use Oro\Bundle\UIBundle\Event\BeforeListRenderEvent;
 use Oro\Bundle\UserBundle\Entity\User;
@@ -16,7 +16,7 @@ class UserViewListener
         }
 
         $template = $event->getEnvironment()->render(
-            '@AcmeTraining/user/user_naming.html.twig',
+            '@UserNamed/user/user_naming.html.twig',
             ['entity' => $userEntity]
         );
 

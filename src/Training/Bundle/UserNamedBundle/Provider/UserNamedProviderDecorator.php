@@ -1,11 +1,11 @@
 <?php
 
-namespace Acme\Bundle\TrainingBundle\Provider;
+namespace Training\Bundle\UserNamedBundle\Provider;
 
 use Oro\Bundle\EntityBundle\Provider\EntityNameProviderInterface;
 use Oro\Bundle\UserBundle\Entity\User;
 
-class TrainingUserNameProviderDecorator implements EntityNameProviderInterface
+class UserNamedProviderDecorator implements EntityNameProviderInterface
 {
     /**
      * @param EntityNameProviderInterface $originalProvider
