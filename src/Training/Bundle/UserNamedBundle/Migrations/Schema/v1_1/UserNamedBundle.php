@@ -1,6 +1,6 @@
 <?php
 
-namespace Training\Bundle\UserNamedBundle\Migrations\Schema\v1_0;
+namespace Training\Bundle\UserNamedBundle\Migrations\Schema\v1_1;
 
 use Doctrine\DBAL\Schema\Schema;
 use Oro\Bundle\EntityExtendBundle\EntityConfig\ExtendScope;
@@ -25,35 +25,10 @@ class UserNamedBundle implements Migration, ExtendExtensionAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function getMigrationVersion(): string
-    {
-        return 'v1_0';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function up(Schema $schema, QueryBag $queries)
     {
-        /** Tables generation **/
-        $this->createUserNamingTypeTable($schema);
-
         /** Foreign keys generation **/
         $this->addRelationsToUser($schema);
-    }
-
-    /**
-     * Create oro_organization table
-     */
-    protected function createUserNamingTypeTable(Schema $schema)
-    {
-        $table = $schema->createTable('user_naming_type');
-        $table->addColumn('id', 'integer', ['autoincrement' => true]);
-        $table->addColumn('title', 'string', ['length' => 255]);
-        $table->addColumn('format', 'string', ['notnull' => false]);
-        $table->addColumn('enabled', 'boolean', ['default' => '1']);
-        $table->addUniqueIndex(['title'], 'uniq_628fc0a231749');
-        $table->setPrimaryKey(['id']);
     }
 
     private function addRelationsToUser(Schema $schema)
@@ -61,9 +36,9 @@ class UserNamedBundle implements Migration, ExtendExtensionAwareInterface
         $this->extendExtension->addManyToOneRelation(
             $schema,
             'oro_user', // owning side table
-            'naming_type', // owning side field name
+            'namingType', // owning side field name
             'user_naming_type', // inverse side table
-            'id', // column name is used to show related entity
+            'title', // column name is used to show related entity
             [
                 'extend' => [
                     'owner' => ExtendScope::OWNER_CUSTOM

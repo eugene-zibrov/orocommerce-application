@@ -18,23 +18,13 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
  */
 class UserNamedBundleInstaller implements Installation, ExtendExtensionAwareInterface
 {
-    /** @var ExtendExtension */
     private ExtendExtension $extendExtension;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setExtendExtension(ExtendExtension $extendExtension)
-    {
-        $this->extendExtension = $extendExtension;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function getMigrationVersion(): string
     {
-        return 'v1_0';
+        return 'v1_1';
     }
 
     /**
@@ -44,7 +34,6 @@ class UserNamedBundleInstaller implements Installation, ExtendExtensionAwareInte
     {
         /** Tables generation **/
         $this->createUserNamingTypeTable($schema);
-
         /** Foreign keys generation **/
         $this->addRelationsToUser($schema);
     }
@@ -57,7 +46,7 @@ class UserNamedBundleInstaller implements Installation, ExtendExtensionAwareInte
         $table = $schema->createTable('user_naming_type');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('title', 'string', ['length' => 255]);
-        $table->addColumn('format', 'string', ['notnull' => false]);
+        $table->addColumn('format', 'string', ['length' => 255]);
         $table->addColumn('enabled', 'boolean', ['default' => '1']);
         $table->addUniqueIndex(['title'], 'uniq_628fc0a231749');
         $table->setPrimaryKey(['id']);
@@ -68,14 +57,19 @@ class UserNamedBundleInstaller implements Installation, ExtendExtensionAwareInte
         $this->extendExtension->addManyToOneRelation(
             $schema,
             'oro_user', // owning side table
-            'naming_type', // owning side field name
+            'namingType', // owning side field name
             'user_naming_type', // inverse side table
-            'id', // column name is used to show related entity
+            'title', // column name is used to show related entity
             [
                 'extend' => [
                     'owner' => ExtendScope::OWNER_CUSTOM
                 ]
             ]
         );
+    }
+
+    public function setExtendExtension(ExtendExtension $extendExtension)
+    {
+        $this->extendExtension = $extendExtension;
     }
 }

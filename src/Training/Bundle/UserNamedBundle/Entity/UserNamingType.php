@@ -5,15 +5,25 @@ namespace Training\Bundle\UserNamedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\UserBundle\Entity\User;
+use Training\Bundle\UserNamedBundle\Model\ExtendUserNamingType;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="user_naming_type")
  * @Config(
- *
+ *      routeName="training_user_naming_index",
+ *      routeView="training_user_naming_view",
+ *      defaultValues={
+ *         "entity" = {
+ *              "icon"="fa-child"
+ *         },
+ *         "grid" = {
+ *              "default" = "tarining-user-naming-types-grid"
+ *         }
+ *     }
  * )
  */
-class UserNamingType
+class UserNamingType extends ExtendUserNamingType
 {
     /**
      * @var int $id
@@ -36,12 +46,6 @@ class UserNamingType
     private string $format;
 
     /**
-     * @var User[] $users
-     * @ORM\OneToMany(targetEntity="Oro\Bundle\UserBundle\Entity\User", mappedBy="namingFormat")
-     */
-    private array $users;
-
-    /**
      * @return int
      */
     public function getId(): int
@@ -52,9 +56,10 @@ class UserNamingType
     /**
      * @param int $id
      */
-    public function setId(int $id): void
+    public function setId(int $id): self
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -68,9 +73,10 @@ class UserNamingType
     /**
      * @param string $title
      */
-    public function setTitle(string $title): void
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
     }
 
     /**
@@ -84,24 +90,9 @@ class UserNamingType
     /**
      * @param string $format
      */
-    public function setFormat(string $format): void
+    public function setFormat(string $format): self
     {
         $this->format = $format;
-    }
-
-    /**
-     * @return array
-     */
-    public function getUsers(): array
-    {
-        return $this->users;
-    }
-
-    /**
-     * @param array $users
-     */
-    public function setUsers(array $users): void
-    {
-        $this->users = $users;
+        return $this;
     }
 }
