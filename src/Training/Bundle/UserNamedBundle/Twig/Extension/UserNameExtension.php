@@ -22,6 +22,7 @@ class UserNameExtension extends AbstractExtension
      */
     public function formatFullName(User $user): string
     {
+        dump($user);
         return sprintf(
             '%s %s %s',
             ucfirst($user->getFirstName()),

@@ -37,7 +37,7 @@ class UserNamingType
 
     /**
      * @var User[] $users
-     * @ORM\OneToMany(targetEntity="Oro\Bundle\UserBundle\Entity\User", mappedBy="name_format")
+     * @ORM\OneToMany(targetEntity="Oro\Bundle\UserBundle\Entity\User", mappedBy="namingFormat")
      */
     private array $users;
 
