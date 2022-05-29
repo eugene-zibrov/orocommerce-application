@@ -1,0 +1,10 @@
+training:
+  user:
+    full_name:  "Full name"
+  usernaming:
+    type:
+      title:
+        label: "Title"
+      format:
+        label: "Format"
+    entity_plural_label: "User Naming Types"

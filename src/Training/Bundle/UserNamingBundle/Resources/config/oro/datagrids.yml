@@ -1,0 +1,18 @@
+datagrids:
+    training-user-naming-types-grid:
+        source:
+            type: orm
+            query:
+                select:
+                    - type.id
+                    - type.title
+                    - type.format
+                from:
+                    - { table: Training\Bundle\UserNamingBundle\Entity\UserNamingType, alias: type }
+        columns:
+            id:
+                label: ID
+            title:
+                label: training.usernaming.type.title.label
+            format:
+                label: training.usernaming.type.format.label

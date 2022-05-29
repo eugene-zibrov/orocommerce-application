@@ -1,0 +1,30 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Training\Bundle\UserNamingBundle\:
+    resource: '../../*'
+
+  Training\Bundle\UserNamingBundle\Provider\UserNamingProviderDecorator:
+    decorates: Oro\Bundle\LocaleBundle\Provider\EntityNameProvider
+    arguments:
+      - '@Training\Bundle\UserNamingBundle\Provider\UserNamingProviderDecorator.inner'
+    tags:
+      - { name: oro_entity.name_provider, priority: -60 }
+
+  Training\Bundle\UserNamingBundle\EventListener\UserViewListener:
+    tags:
+      - { name: kernel.event_listener, event: oro_ui.scroll_data.before.userView, method: onUserView }
+
+  Training\Bundle\UserNamingBundle\Twig\Extension\UserNamingExtension:
+    calls:
+      - setContainer: ['@service_container']
+    tags:
+      - { name: twig.extension }
+
+  Training\Bundle\UserNamingBundle\Service\UserNamingFormatterService:
+    calls:
+      - setContainer: [ '@service_container' ]
+
+  Oro\Bundle\LocaleBundle\Provider\EntityNameProvider: '@oro_locale.entity_name_provider'
