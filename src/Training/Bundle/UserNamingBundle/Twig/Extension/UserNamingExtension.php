@@ -3,15 +3,17 @@
 namespace Training\Bundle\UserNamingBundle\Twig\Extension;
 
 use Oro\Bundle\UserBundle\Entity\User;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Training\Bundle\UserNamingBundle\Entity\UserNamingType;
+use Training\Bundle\UserNamingBundle\Service\NamingConverterInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
-class UserNamingExtension extends AbstractExtension implements ContainerAwareInterface
+class UserNamingExtension extends AbstractExtension
 {
-    private ContainerInterface $container;
+
+    public function __construct(private NamingConverterInterface $formatter)
+    {
+    }
+
     /**
      * @return iterable
      */
@@ -26,16 +28,6 @@ class UserNamingExtension extends AbstractExtension implements ContainerAwareInt
      */
     public function formatFullName(User $user): string
     {
-        return sprintf(
-            '%s %s %s',
-            ucfirst($user->getFirstName()),
-            ucfirst($user->getMiddleName()),
-            ucfirst($user->getLastName())
-        );
-    }
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
+        return $this->formatter->getNameFor($user);
     }
 }

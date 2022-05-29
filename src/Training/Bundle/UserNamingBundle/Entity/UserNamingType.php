@@ -140,4 +140,9 @@ class UserNamingType extends ExtendUserNamingType
         $this->format = $format;
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->title;
+    }
 }

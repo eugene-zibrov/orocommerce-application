@@ -17,9 +17,10 @@ services:
     tags:
       - { name: kernel.event_listener, event: oro_ui.scroll_data.before.userView, method: onUserView }
 
+
   Training\Bundle\UserNamingBundle\Twig\Extension\UserNamingExtension:
-    calls:
-      - setContainer: ['@service_container']
+    arguments:
+      - '@Training\Bundle\UserNamingBundle\Service\NamingConverterInterface'
     tags:
       - { name: twig.extension }
 
@@ -27,4 +28,9 @@ services:
     calls:
       - setContainer: [ '@service_container' ]
 
+  training_user_naming_formatter:
+    class: Training\Bundle\UserNamingBundle\Service\NamingConverter
+
+
+  Training\Bundle\UserNamingBundle\Service\NamingConverterInterface: '@training_user_naming_formatter'
   Oro\Bundle\LocaleBundle\Provider\EntityNameProvider: '@oro_locale.entity_name_provider'

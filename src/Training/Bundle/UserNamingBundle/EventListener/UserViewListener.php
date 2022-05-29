@@ -14,9 +14,8 @@ class UserViewListener
         if (!is_a($userEntity, User::class)) {
             return;
         }
-
         $template = $event->getEnvironment()->render(
-            '@UserNaming/_partials/user_naming/info.html.twig',
+            '@UserNaming/UserNaming/Partials/info.html.twig',
             ['entity' => $userEntity]
         );
 
