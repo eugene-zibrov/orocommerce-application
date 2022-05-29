@@ -4,6 +4,7 @@ navigation:
             user_naming:
                 label: 'training.usernaming.entity_plural_label'
                 route: 'training_user_naming_index'
+                position: 10
         tree:
             application_menu:
                 children:
