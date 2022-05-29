@@ -1,0 +1,8 @@
+{% import '@OroUI/macros.html.twig' as UI %}
+
+{{ UI.renderProperty('training.usernaming.type.id.label'|trans, entity.id ) }}
+{{ UI.renderProperty('training.usernaming.type.title.label'|trans, entity.title ) }}
+{{ UI.renderProperty('training.usernaming.type.format.label'|trans, entity.format ) }}
+{{ UI.renderProperty('training.usernaming.type.example.label'|trans, entity.example ) }}
+{% set is_enabled = entity.enabled ? 'training.usernaming.type.enabled.yes' : 'training.usernaming.type.enabled.no' %}
+{{ UI.renderProperty('training.usernaming.type.enabled.label'|trans,  is_enabled |trans ) }}

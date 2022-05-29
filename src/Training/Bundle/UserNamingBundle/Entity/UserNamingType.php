@@ -13,9 +13,6 @@ use Training\Bundle\UserNamingBundle\Model\ExtendUserNamingType;
  *      routeName="training_user_naming_index",
  *      routeView="training_user_naming_show",
  *      defaultValues={
- *         "entity" = {
- *              "icon"="fa-child"
- *         },
  *         "grid" = {
  *              "default" = "tarining-user-naming-types-grid"
  *         },
@@ -51,9 +48,47 @@ class UserNamingType extends ExtendUserNamingType
 
     /**
      * @var string $example
-     * @ORM\Column(name="example", type="string", length=255, nullable=false, options={default:""})
+     * @ORM\Column(name="example", type="string", length=255, nullable=false)
      */
     private string $example;
+
+    /**
+     * @var string $example
+     * @ORM\Column(name="enabled", type="integer", nullable=false)
+     */
+    private string $enabled;
+
+    /**
+     * @return string
+     */
+    public function getEnabled(): string
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param string $enabled
+     */
+    public function setEnabled(string $enabled): void
+    {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExample(): string
+    {
+        return $this->example;
+    }
+
+    /**
+     * @param string $example
+     */
+    public function setExample(string $example): void
+    {
+        $this->example = $example;
+    }
 
     /**
      * @return int

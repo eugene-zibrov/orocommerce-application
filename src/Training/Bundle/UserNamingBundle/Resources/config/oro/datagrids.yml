@@ -16,3 +16,35 @@ datagrids:
                 label: training.usernaming.type.title.label
             format:
                 label: training.usernaming.type.format.label
+            example:
+                label: "Example"
+            enabled:
+                frontend_type: select
+                editable: true
+                choices:
+                    Active: 1
+                    Inactive: 0
+        properties:
+            id: ~
+            view_link:
+                type: url
+                route: training_user_naming_show
+                params: [ id ]
+            delete_link:
+                type: url
+                route: training_user_naming_delete
+                params: [ id ]
+        actions:
+            view:
+                type: navigate
+                label: oro.grid.action.view
+                link: view_link
+                icon: eye
+                rowAction: true
+            delete:
+                type: delete
+                label: oro.grid.action.delete
+                icon: trash
+                link: delete_link
+
+

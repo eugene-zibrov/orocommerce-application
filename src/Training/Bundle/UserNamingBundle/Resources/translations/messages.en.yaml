@@ -9,4 +9,10 @@ training:
         label: "Title"
       format:
         label: "Format"
+      example:
+        label: "Example"
+      enabled:
+        label: "State"
+        yes: "Enabled"
+        no: "Disabled"
     entity_plural_label: "User Naming Types"
