@@ -3,6 +3,8 @@ training:
     full_name:  "Full name"
   usernaming:
     type:
+      id:
+        label: "ID"
       title:
         label: "Title"
       format:

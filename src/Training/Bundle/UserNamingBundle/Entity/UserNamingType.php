@@ -50,6 +50,12 @@ class UserNamingType extends ExtendUserNamingType
     private string $format;
 
     /**
+     * @var string $example
+     * @ORM\Column(name="example", type="string", length=255, nullable=false, options={default:""})
+     */
+    private string $example;
+
+    /**
      * @return int
      */
     public function getId(): int

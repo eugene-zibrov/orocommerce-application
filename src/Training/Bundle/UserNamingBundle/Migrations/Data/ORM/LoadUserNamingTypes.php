@@ -10,9 +10,18 @@ use Training\Bundle\UserNamingBundle\Entity\UserNamingType;
 class LoadUserNamingTypes extends AbstractFixture implements OrderedFixtureInterface
 {
     private array $data = [
-        'Official'         => 'PREFIX FIRST MIDDLE LAST SUFFIX',
-        'Unofficial'       => 'FIRST LAST',
-        'First name only'  => 'FIRST'
+        'Official'         => [
+            'PREFIX FIRST MIDDLE LAST SUFFIX',
+            'Mr John Artur Doe Jr'
+        ],
+        'Unofficial'       => [
+            'FIRST LAST',
+            'John Doe'
+        ],
+        'First name only'  => [
+            'FIRST',
+            'John'
+        ]
     ];
 
     /**
@@ -32,11 +41,12 @@ class LoadUserNamingTypes extends AbstractFixture implements OrderedFixtureInter
      */
     public function load(ObjectManager $manager)
     {
-        foreach ($this->data as $title => $format) {
+        foreach ($this->data as $title => $data) {
             $userNamingType = new UserNamingType();
             $userNamingType
                 ->setTitle($title)
-                ->setFormat($format);
+                ->setFormat($data[0])
+                ->setExample($data[1]);
 
             $manager->persist($userNamingType);
         }
