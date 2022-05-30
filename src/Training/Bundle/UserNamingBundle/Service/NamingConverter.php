@@ -34,6 +34,12 @@ class NamingConverter implements NamingConverterInterface
         if (!$naming) {
             $naming = self::DEFAULT_NAMING;
         }
-        return trim(str_replace(array_keys($map), array_values($map), $naming));
+        return trim(
+            str_replace(
+                array_keys($map),
+                array_values($map),
+                $naming
+            )
+        );
     }
 }

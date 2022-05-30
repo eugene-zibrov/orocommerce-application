@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Training\Bundle\UserNamingBundle\Entity\UserNamingType;
+use Training\Bundle\UserNamingBundle\Form\Type\UserNamingFormType;
 
 class UserNamingTypeController extends AbstractController
 {
@@ -18,6 +19,9 @@ class UserNamingTypeController extends AbstractController
      */
     public function index()
     {
+        return [
+            'entity_class' => UserNamingType::class
+        ];
     }
 
     /**
@@ -43,10 +47,20 @@ class UserNamingTypeController extends AbstractController
 
     /**
      * @Route("/create", name="training_user_naming_create", methods={"POST"})
+     * @Template("@UserNaming/UserNaming/create.html.twig")
      */
     public function create(Request $request)
     {
+        return $this->populateForm(new UserNamingType());
+    }
 
+    /**
+     * @Route("/edit/{id}", name="training_user_naming_update")
+     * @Template("@UserNaming/UserNaming/edit.html.twig")
+     */
+    public function edit(UserNamingType $type)
+    {
+        return $this->populateForm($type);
     }
 
     /**
@@ -57,6 +71,16 @@ class UserNamingTypeController extends AbstractController
     {
         return [
             'entity' => $type
+        ];
+    }
+
+    private function populateForm(UserNamingType $type)
+    {
+        $form = $this->createForm(UserNamingFormType::class, $type);
+
+        return [
+            'entity' => $type,
+            'form' => $form->createView()
         ];
     }
 }

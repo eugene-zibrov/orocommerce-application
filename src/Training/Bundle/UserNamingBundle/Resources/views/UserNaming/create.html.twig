@@ -1,4 +1,4 @@
- {% extends '@OroUI/actions/update.html.twig' %}
+{% extends '@OroUI/actions/update.html.twig' %}
 {% import '@OroUI/macros.html.twig' as UI %}
  {% form_theme form with '@OroForm/Form/fields.html.twig' %}
 {% set pageTitle = 'training.usernaming.entity_plural_label'|trans %}
@@ -24,25 +24,25 @@
 {% endblock pageHeader %}
 
 {% block content_data %}
-     {% set id = 'task-edit' %}
-     {% set dataBlocks = [{
-         'title': 'General'|trans,
-         'class': 'active',
-         'subblocks': [{
-         'title': '',
-         'data': [
-             form_row(form.title),
-             form_row(form.example),
-             form_row(form.format),
-             form_row(form.enabled),
-         ]
-     }]
-     }]
-     %}
-     {% set data = {
-         'formErrors': form_errors(form) ? form_errors(form) : null,
-         'dataBlocks': dataBlocks,
-     } %}
+    {% set id = 'task-edit' %}
+    {% set dataBlocks = [{
+        'title': 'General'|trans,
+        'class': 'active',
+        'subblocks': [{
+            'title': '',
+            'data': [
+                form_row(form.title),
+                form_row(form.example),
+                form_row(form.format),
+                form_row(form.enabled),
+            ]
+        }]
+    }]
+    %}
+    {% set data = {
+        'formErrors': form_errors(form) ? form_errors(form) : null,
+        'dataBlocks': dataBlocks,
+    } %}
 
-     {{ parent() }}
- {% endblock content_data %}
+    {{ parent() }}
+{% endblock content_data %}
