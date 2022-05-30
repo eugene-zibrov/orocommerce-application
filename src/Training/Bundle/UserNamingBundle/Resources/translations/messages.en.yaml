@@ -1,0 +1,18 @@
+training:
+  user:
+    full_name:  "Full name"
+  usernaming:
+    type:
+      id:
+        label: "ID"
+      title:
+        label: "Title"
+      format:
+        label: "Format"
+      example:
+        label: "Example"
+      enabled:
+        label: "State"
+        yes: "Enabled"
+        no: "Disabled"
+    entity_plural_label: "User Naming Types"
