@@ -1,0 +1,28 @@
+services:
+    training.usernaming.imortexport.data.converter:
+        parent: oro_importexport.data_converter.configurable
+
+    training.usernaming.imortexport.processor.export:
+        parent: oro_importexport.processor.export_abstract
+        calls:
+            - [setDataConverter, ['@training.usernaming.imortexport.data.converter']]
+        tags:
+            - name: oro_importexport.processor
+              type: export
+              entity: Training\Bundle\UserNamingBundle\Entity\UserNamingType
+              alias: training_uisernaming_export_task
+
+    training.usernaming.imortexport.processor.import:
+        parent: oro_importexport.processor.import_abstract
+        calls:
+            - [ setDataConverter, ['@training.usernaming.imortexport.data.converter']]
+        tags:
+          - name: oro_importexport.processor
+            type: import
+            entity: Training\Bundle\UserNamingBundle\Entity\UserNamingType
+            alias: training_uisernaming_import_task
+
+    training.usernaming.imortexport.template_fixture.task:
+        class: Training\Bundle\UserNamingBundle\ImportExport\TemplateFixture\UserNamingFixture
+        tags:
+            - { name: oro_importexport.template_fixture }

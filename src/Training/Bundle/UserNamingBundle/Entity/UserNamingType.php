@@ -4,9 +4,6 @@ namespace Training\Bundle\UserNamingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
-use Oro\Bundle\OrganizationBundle\Entity\Organization;
-use Oro\Bundle\UserBundle\Entity\User;
 use Training\Bundle\UserNamingBundle\Model\ExtendUserNamingType;
 
 /**
@@ -72,9 +69,10 @@ class UserNamingType extends ExtendUserNamingType
     /**
      * @param string $enabled
      */
-    public function setEnabled(string $enabled): void
+    public function setEnabled(string $enabled): self
     {
         $this->enabled = $enabled;
+        return $this;
     }
 
     /**
@@ -88,9 +86,10 @@ class UserNamingType extends ExtendUserNamingType
     /**
      * @param string $example
      */
-    public function setExample(string $example): void
+    public function setExample(string $example): self
     {
         $this->example = $example;
+        return $this;
     }
 
     /**
