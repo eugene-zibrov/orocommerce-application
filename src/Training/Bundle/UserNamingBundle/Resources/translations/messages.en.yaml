@@ -2,6 +2,7 @@ training:
   user:
     full_name:  "Full name"
   usernaming:
+
     security:
       training_user_naming_info:
         label: "Training User Naming entity"
@@ -21,4 +22,15 @@ training:
         no: "Disabled"
     entity_plural_label: "User Naming Types"
     usernamingtype:
+      enabled:
+        label: 'Is Enabled'
+      example:
+        label: 'Example'
+      format:
+        label: 'Format'
+      id:
+        label: 'ID'
+      title:
+        label: 'Title'
+      entity_plural_label: "User Naming Types"
       entity_label: "User Naming Types"

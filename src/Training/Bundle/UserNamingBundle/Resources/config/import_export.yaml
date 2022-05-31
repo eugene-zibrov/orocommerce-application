@@ -1,28 +1,60 @@
 services:
-    training.usernaming.imortexport.data.converter:
+    # Data Converters
+    training.usernaming.importexport.data.converter:
         parent: oro_importexport.data_converter.configurable
 
-    training.usernaming.imortexport.processor.export:
+    training.usernaming.importexport.data.converter.template_fixture:
+        parent: oro_importexport.data_converter.template_fixture.configurable
+
+    # Strategies
+    training.usernaming.importexport.strategy.add_or_replace:
+        parent: oro_importexport.strategy.configurable_add_or_replace
+
+    # Data Export Processors
+    training.usernaming.importexport.processor.export:
         parent: oro_importexport.processor.export_abstract
         calls:
-            - [setDataConverter, ['@training.usernaming.imortexport.data.converter']]
+            - [setDataConverter, ['@training.usernaming.importexport.data.converter']]
         tags:
             - name: oro_importexport.processor
               type: export
               entity: Training\Bundle\UserNamingBundle\Entity\UserNamingType
-              alias: training_uisernaming_export_task
+              alias: training_uisernaming_type_export
 
-    training.usernaming.imortexport.processor.import:
+    training.usernaming.importexport.processor.export_template:
+        parent: oro_importexport.processor.export_abstract
+        calls:
+            - [ setDataConverter, [ '@training.usernaming.importexport.data.converter.template_fixture' ] ]
+        tags:
+            -   name: oro_importexport.processor
+                type: export_template
+                entity: Training\Bundle\UserNamingBundle\Entity\UserNamingType
+                alias: training_uisernaming_type_export
+
+    # Data Importers
+    training.usernaming.importexport.processor.import:
         parent: oro_importexport.processor.import_abstract
         calls:
-            - [ setDataConverter, ['@training.usernaming.imortexport.data.converter']]
+            - [ setDataConverter, ['@training.usernaming.importexport.data.converter']]
+            - [ setStrategy, ['@training.usernaming.importexport.strategy.add_or_replace']]
         tags:
-          - name: oro_importexport.processor
-            type: import
-            entity: Training\Bundle\UserNamingBundle\Entity\UserNamingType
-            alias: training_uisernaming_import_task
+            -
+                name: oro_importexport.processor
+                type: import
+                entity: Training\Bundle\UserNamingBundle\Entity\UserNamingType
+                alias: training_uisernaming_type_import_with_strategy_add_or_replace
+            -
+                name: oro_importexport.processor
+                type: import_validation
+                entity: Training\Bundle\UserNamingBundle\Entity\UserNamingType
+                alias: training_uisernaming_type_import_with_strategy_add_or_replace
 
-    training.usernaming.imortexport.template_fixture.task:
-        class: Training\Bundle\UserNamingBundle\ImportExport\TemplateFixture\UserNamingFixture
+    # Configuration Provider
+    Training\Bundle\UserNamingBundle\ImportExport\ConfigurationProvider\ImportExportUserNamingConfigurationProvider:
+        tags:
+            - { name: oro_importexport.configuration, alias: training_user_naming }
+
+    # Template Fixtures
+    Training\Bundle\UserNamingBundle\ImportExport\TemplateFixture\UserNamingFixture:
         tags:
             - { name: oro_importexport.template_fixture }

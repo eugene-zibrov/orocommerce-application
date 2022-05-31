@@ -2,7 +2,8 @@ version: '3.5'
 services:
   mysql:
     image: mysql:8
-    ports: ['3306']
+    ports:
+      - '3306:3306'
     labels:
       com.symfony.server.service-prefix: ORO_DB
     volumes:
@@ -21,7 +22,9 @@ services:
     restart: on-failure
   mailcatcher:
     image: schickling/mailcatcher
-    ports: ['1025', '1080']
+    ports:
+      - "1080:1080"
+      - "1025:1025"
     labels:
       com.symfony.server.service-prefix: ORO_MAILER
 volumes:

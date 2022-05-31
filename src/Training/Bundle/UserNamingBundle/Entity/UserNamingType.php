@@ -4,6 +4,7 @@ namespace Training\Bundle\UserNamingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 use Training\Bundle\UserNamingBundle\Model\ExtendUserNamingType;
 
 /**
@@ -31,30 +32,65 @@ class UserNamingType extends ExtendUserNamingType
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(name="id", type="integer")
+     * @ConfigField(
+     *      defaultValues={
+     *          "importexport"={
+     *              "order"=10,
+     *          }
+     *      }
+     * )
      */
     private int $id;
 
     /**
      * @var string $title
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
+     * @ConfigField(
+     *      defaultValues={
+     *          "importexport"={
+     *              "order"=20,
+     *          }
+     *      }
+     * )
      */
     private string $title;
 
     /**
      * @var string $format
      * @ORM\Column(name="format", type="string", length=255, nullable=false)
+     * @ConfigField(
+     *      defaultValues={
+     *          "importexport"={
+     *              "order"=30,
+     *          }
+     *      }
+     * )
      */
     private string $format;
 
     /**
      * @var string $example
      * @ORM\Column(name="example", type="string", length=255, nullable=false)
+     * @ConfigField(
+     *      defaultValues={
+     *          "importexport"={
+     *              "order"=40,
+     *          }
+     *      }
+     * )
      */
     private string $example;
 
     /**
-     * @var string $example
+     * @var string $enabled
      * @ORM\Column(name="enabled", type="integer", nullable=false)
+     * @ConfigField(
+     *      defaultValues={
+     *          "importexport"={
+     *              "order"=50,
+     *          }
+     *      }
+     * )
      */
     private string $enabled;
 

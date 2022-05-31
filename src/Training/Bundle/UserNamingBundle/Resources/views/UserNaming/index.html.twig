@@ -9,12 +9,5 @@
         'path' : path('training_user_naming_create'),
         'entity_label': 'training.usernaming.entity_plural_label'|trans
     }) }}
-    {% include '@OroImportExport/ImportExport/buttons.html.twig' with {
-        entity_class: 'Training\\Bundle\\UserNamingBundle\\Entity\\UserNamingType',
-        exportProcessor: 'training_uisernaming_export_task',
-        exportTitle: 'Export',
-        importProcessor: 'training_uisernaming_import_task',
-        importTitle: 'Import',
-        datagridName: gridName
-    } %}
+    {% include '@OroImportExport/ImportExport/buttons_from_configuration.html.twig' with {'alias': 'training_user_naming'} %}
 {% endblock %}
