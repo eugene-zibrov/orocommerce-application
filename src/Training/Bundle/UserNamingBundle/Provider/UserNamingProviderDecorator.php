@@ -4,14 +4,17 @@ namespace Training\Bundle\UserNamingBundle\Provider;
 
 use Oro\Bundle\EntityBundle\Provider\EntityNameProviderInterface;
 use Oro\Bundle\UserBundle\Entity\User;
+use Training\Bundle\UserNamingBundle\Service\NamingConverterInterface;
 
 class UserNamingProviderDecorator implements EntityNameProviderInterface
 {
     /**
      * @param EntityNameProviderInterface $originalProvider
      */
-    public function __construct(private EntityNameProviderInterface $originalProvider)
-    {
+    public function __construct(
+        private EntityNameProviderInterface $originalProvider,
+        private NamingConverterInterface $namingConverter
+    ) {
     }
 
     /**
@@ -24,7 +27,7 @@ class UserNamingProviderDecorator implements EntityNameProviderInterface
     {
         /** @var User $entity */
         if ($this->supports($entity)) {
-            return implode(' ', [$entity->getLastName(), $entity->getFirstName(), $entity->getMiddleName()]);
+            return $this->namingConverter->getNameFor($entity);
         }
         return $this->originalProvider->getName($format, $locale, $entity);
     }

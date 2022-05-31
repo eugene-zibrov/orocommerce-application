@@ -10,6 +10,7 @@ services:
     decorates: Oro\Bundle\LocaleBundle\Provider\EntityNameProvider
     arguments:
       - '@Training\Bundle\UserNamingBundle\Provider\UserNamingProviderDecorator.inner'
+      - '@Training\Bundle\UserNamingBundle\Service\NamingConverterInterface'
     tags:
       - { name: oro_entity.name_provider, priority: -60 }
 
