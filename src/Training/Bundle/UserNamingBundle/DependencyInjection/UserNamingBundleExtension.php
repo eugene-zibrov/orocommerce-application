@@ -14,6 +14,7 @@ class UserNamingBundleExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('controllers.yaml');
         $loader->load('services.yaml');
+        $loader->load('services_api.yml');
         $loader->load('import_export.yaml');
     }
 }

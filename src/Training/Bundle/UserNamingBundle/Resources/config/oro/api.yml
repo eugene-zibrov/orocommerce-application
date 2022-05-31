@@ -1,0 +1,35 @@
+api:
+    entities:
+        Training\Bundle\UserNamingBundle\Entity\UserNamingType:
+            fields:
+                id:
+                    description: 'User naming type id'
+                format:
+                    description: 'User naming format that used to User naming'
+                example:
+                    description: 'User naming short description'
+                enabled:
+                    description: 'Is user naming enabled field'
+                title:
+                    exclude: true
+            filters:
+                fields:
+                    title:
+                        exclude: false
+                    enabled:
+                        exclude: false
+            sorters:
+                fields:
+                    id:
+                        exclude: false
+                    title:
+                        exclude: false
+            actions:
+                get:
+                    fields:
+                        title:
+                            exclude: false
+                create:
+                    fields:
+                        enabled:
+                            exclude: true
