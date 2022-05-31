@@ -3,3 +3,10 @@
 
 {% set gridName = 'training-user-naming-types-grid' %}
 {% set pageTitle = 'training.usernaming.entity_plural_label'|trans %}
+
+{% block navButtons %}
+    {{ UI.addButton({
+        'path' : path('training_user_naming_create'),
+        'entity_label': 'training.usernaming.entity_plural_label'|trans
+    }) }}
+{% endblock %}

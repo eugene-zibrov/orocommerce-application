@@ -4,6 +4,9 @@ namespace Training\Bundle\UserNamingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
+use Oro\Bundle\OrganizationBundle\Entity\Organization;
+use Oro\Bundle\UserBundle\Entity\User;
 use Training\Bundle\UserNamingBundle\Model\ExtendUserNamingType;
 
 /**
@@ -15,13 +18,6 @@ use Training\Bundle\UserNamingBundle\Model\ExtendUserNamingType;
  *      defaultValues = {
  *         "grid" = {
  *              "default" = "tarining-user-naming-types-grid"
- *         },
- *         "ownership" = {
- *              "owner_type"="USER",
- *              "owner_field_name"="owner",
- *              "owner_column_name"="owner_id",
- *              "organization_field_name"="organization",
- *              "organization_column_name"="organization_id"
  *         },
  *         "security"={
  *             "type"="ACL",

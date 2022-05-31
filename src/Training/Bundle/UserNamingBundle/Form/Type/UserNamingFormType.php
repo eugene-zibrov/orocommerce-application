@@ -17,7 +17,12 @@ class UserNamingFormType extends AbstractType
             ->add('title', TextType::class)
             ->add('example', TextType::class)
             ->add('format', TextType::class)
-            ->add('enabled', ChoiceType::class);
+            ->add('enabled', ChoiceType::class, [
+                'choices' => [
+                    'Yes' => 1,
+                    'No'  => 0,
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

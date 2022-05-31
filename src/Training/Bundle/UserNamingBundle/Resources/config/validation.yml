@@ -13,5 +13,4 @@ Training\Bundle\UserNamingBundle\Entity\UserNamingType:
             - Length:
                 max: 255
         enabled:
-            - Type:
-                type: integer
+            - NotNull: ~

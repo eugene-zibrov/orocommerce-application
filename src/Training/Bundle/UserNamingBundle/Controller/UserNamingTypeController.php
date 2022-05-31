@@ -2,7 +2,6 @@
 
 namespace Training\Bundle\UserNamingBundle\Controller;
 
-use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +16,7 @@ class UserNamingTypeController extends AbstractController
      * @Route("/", name="training_user_naming_index")
      * @Template("@UserNaming/UserNaming/index.html.twig")
      */
-    public function index()
+    public function indexAction()
     {
         return [
             'entity_class' => UserNamingType::class
@@ -28,7 +27,7 @@ class UserNamingTypeController extends AbstractController
      * @Route("/show/{id}", name="training_user_naming_show", methods={"GET"})
      * @Template("@UserNaming/UserNaming/show.html.twig")
      */
-    public function show(UserNamingType $type)
+    public function showAction(UserNamingType $type)
     {
         return [
             'entity' => $type
@@ -38,29 +37,49 @@ class UserNamingTypeController extends AbstractController
     /**
      * @Route("/delete/{id}", name="training_user_naming_delete", methods={"DELETE"})
      */
-    public function delete(UserNamingType $type)
+    public function deleteAction(UserNamingType $type)
     {
-        $doctrine = $this->container->get(DoctrineHelper::class);
+        $doctrine = $this->container->get('doctrine');
         $doctrine->getManager()->remove($type);
-        return new Response('', Response::HTTP_ACCEPTED);
+        return new Response('', Response::HTTP_OK);
     }
 
     /**
-     * @Route("/create", name="training_user_naming_create", methods={"POST"})
+     * @Route("/create", name="training_user_naming_create", methods={"GET","POST"})
      * @Template("@UserNaming/UserNaming/create.html.twig")
      */
-    public function create(Request $request)
+    public function createAction(Request $request)
     {
-        return $this->populateForm(new UserNamingType());
+        if ($request->isMethod('POST')) {
+            $this->save($request);
+            return $this->redirectToRoute('training_user_naming_index');
+        }
+        return $this->populateForm();
     }
 
     /**
-     * @Route("/edit/{id}", name="training_user_naming_update")
+     * @Route("/edit/{id}", name="training_user_naming_update", methods={"GET","POST"})
      * @Template("@UserNaming/UserNaming/edit.html.twig")
      */
-    public function edit(UserNamingType $type)
+    public function updateAction(UserNamingType $type)
     {
         return $this->populateForm($type);
+    }
+
+    public function save(Request $request, UserNamingType $type = null): void
+    {
+        $userNaming = is_null($type) ? new UserNamingType() : $type;
+        $form       = $this->createForm(UserNamingFormType::class, $userNaming);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $doctrine = $this->container->get('doctrine');
+            $em = $doctrine->getManager();
+            $em->persist($data);
+            $em->flush();
+        }
     }
 
     /**
@@ -74,7 +93,7 @@ class UserNamingTypeController extends AbstractController
         ];
     }
 
-    private function populateForm(UserNamingType $type)
+    private function populateForm(?UserNamingType $type = null): array
     {
         $form = $this->createForm(UserNamingFormType::class, $type);
 
