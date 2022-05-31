@@ -10,19 +10,13 @@ services:
     decorates: Oro\Bundle\LocaleBundle\Provider\EntityNameProvider
     arguments:
       - '@Training\Bundle\UserNamingBundle\Provider\UserNamingProviderDecorator.inner'
+      - '@Training\Bundle\UserNamingBundle\Service\NamingConverterInterface'
     tags:
       - { name: oro_entity.name_provider, priority: -60 }
 
   Training\Bundle\UserNamingBundle\EventListener\UserViewListener:
     tags:
       - { name: kernel.event_listener, event: oro_ui.scroll_data.before.userView, method: onUserView }
-
-
-  Training\Bundle\UserNamingBundle\Twig\Extension\UserNamingExtension:
-    arguments:
-      - '@Training\Bundle\UserNamingBundle\Service\NamingConverterInterface'
-    tags:
-      - { name: twig.extension }
 
   Training\Bundle\UserNamingBundle\Service\UserNamingFormatterService:
     calls:
@@ -31,6 +25,12 @@ services:
   training_user_naming_formatter:
     class: Training\Bundle\UserNamingBundle\Service\NamingConverter
 
-
   Training\Bundle\UserNamingBundle\Service\NamingConverterInterface: '@training_user_naming_formatter'
+
+  Training\Bundle\UserNamingBundle\Twig\Extension\UserNamingExtension:
+    arguments:
+      - '@Training\Bundle\UserNamingBundle\Service\NamingConverterInterface'
+    tags:
+      - { name: twig.extension }
+
   Oro\Bundle\LocaleBundle\Provider\EntityNameProvider: '@oro_locale.entity_name_provider'
