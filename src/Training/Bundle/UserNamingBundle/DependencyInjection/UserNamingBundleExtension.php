@@ -16,5 +16,6 @@ class UserNamingBundleExtension extends Extension
         $loader->load('services.yaml');
         $loader->load('services_api.yml');
         $loader->load('import_export.yaml');
+        $loader->load('integration.yml');
     }
 }

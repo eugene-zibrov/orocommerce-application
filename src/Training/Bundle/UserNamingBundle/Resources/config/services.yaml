@@ -34,3 +34,7 @@ services:
       - { name: twig.extension }
 
   Oro\Bundle\LocaleBundle\Provider\EntityNameProvider: '@oro_locale.entity_name_provider'
+
+  training.usernaming.example.format:
+    public: true
+    class: Training\Bundle\UserNamingBundle\Service\TrainingNamingConverterExample

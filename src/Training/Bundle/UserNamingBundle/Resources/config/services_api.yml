@@ -12,6 +12,3 @@ services:
             - '@training.usernaming.example.format'
         tags:
             - { name: oro.api.processor, action: get_list, group: finalize, class: Training\Bundle\UserNamingBundle\Entity\UserNamingType }
-
-    training.usernaming.example.format:
-        class: Training\Bundle\UserNamingBundle\Service\TrainingNamingConverterExample

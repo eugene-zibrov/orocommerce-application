@@ -43,4 +43,9 @@ class UserNamingSettingsTransport extends Transport
             'url' => $this->getUrl()
         ]);
     }
+
+    public function __toString(): string
+    {
+        return 'User Naming';
+    }
 }

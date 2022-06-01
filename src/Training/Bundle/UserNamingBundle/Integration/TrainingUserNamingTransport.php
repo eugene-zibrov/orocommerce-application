@@ -7,6 +7,7 @@ use Oro\Bundle\IntegrationBundle\Provider\TransportInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Training\Bundle\UserNamingBundle\Entity\UserNamingSettingsTransport;
+use Training\Bundle\UserNamingBundle\Form\Type\UserNamingIntegrationSettingsFormType;
 
 class TrainingUserNamingTransport implements TransportInterface
 {
@@ -39,7 +40,7 @@ class TrainingUserNamingTransport implements TransportInterface
      */
     public function getSettingsFormType(): string
     {
-        return TextType::class;
+        return UserNamingIntegrationSettingsFormType::class;
     }
 
     /**
