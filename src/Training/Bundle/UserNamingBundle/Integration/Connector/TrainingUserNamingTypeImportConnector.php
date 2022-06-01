@@ -71,13 +71,18 @@ class TrainingUserNamingTypeImportConnector implements ContainerAwareInterface, 
                 $content = file_get_contents($url);
                 $data    = json_decode($content);
                 $manager = $doctrine->getManager();
+                $repository = $manager->getRepository(UserNamingType::class);
                 foreach ($data as $userNaming) {
+                    $existingNamingType = $repository->findOneBy(['format' => $userNaming?->format]);
+                    if (!is_null($existingNamingType)) {
+                        continue;
+                    }
                     $userNamingType = new UserNamingType();
                     $userNamingType
-                    ->setTitle($userNaming?->title)
-                    ->setFormat($userNaming?->format)
-                    ->setExample($converter->getExample($userNaming?->format))
-                    ->setEnabled('1');
+                        ->setTitle($userNaming?->title)
+                        ->setFormat($userNaming?->format)
+                        ->setExample($converter->getExample($userNaming?->format))
+                        ->setEnabled('1');
                     $log->info('UserNamingTypeImport', (array)$userNaming);
                     $manager->persist($userNamingType);
                 }
