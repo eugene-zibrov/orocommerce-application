@@ -24,7 +24,7 @@ class UserNamingBundleInstaller implements Installation, ExtendExtensionAwareInt
      */
     public function getMigrationVersion(): string
     {
-        return 'v1_1';
+        return 'v1_2';
     }
 
     /**

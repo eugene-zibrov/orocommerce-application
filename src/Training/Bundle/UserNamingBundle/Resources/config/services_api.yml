@@ -1,0 +1,14 @@
+services:
+    get.usernaming.add.example.property.processor:
+        class: Training\Bundle\UserNamingBundle\Api\Processor\Get\AddExampleFieldToUserNaming
+        arguments:
+            - '@training.usernaming.example.format'
+        tags:
+            - { name: oro.api.processor, action: get, group: finalize, class: Training\Bundle\UserNamingBundle\Entity\UserNamingType }
+
+    get_list.usernaming.add.example.property.processor:
+        class: Training\Bundle\UserNamingBundle\Api\Processor\GetList\AddExampleFieldToUserNaming
+        arguments:
+            - '@training.usernaming.example.format'
+        tags:
+            - { name: oro.api.processor, action: get_list, group: finalize, class: Training\Bundle\UserNamingBundle\Entity\UserNamingType }

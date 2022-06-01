@@ -1,0 +1,28 @@
+services:
+    _defaults:
+        autowire: true
+
+    training.usernaming.type.integration.channel:
+        class: Training\Bundle\UserNamingBundle\Integration\TrainingUserNamingTypeChannel
+        tags:
+            - { name: oro_integration.channel, type: usernaming_channel }
+
+    training.usernaming.type.integration.transport:
+        public: true
+        class: Training\Bundle\UserNamingBundle\Integration\TrainingUserNamingTransport
+        tags:
+            - { name: oro_integration.transport, channel_type: usernaming_channel, type: rest }
+
+    training.usernaming.type.integration.connector:
+        class: Training\Bundle\UserNamingBundle\Integration\Connector\TrainingUserNamingTypeImportConnector
+        calls:
+            - setContainer: [ '@service_container' ]
+        tags:
+            - { name: oro_integration.connector, channel_type: usernaming_channel, type: task  }
+
+
+    Training\Bundle\UserNamingBundle\Command\TrainingUserNamingIntegrationCommand:
+        calls:
+            - setConnector: [ '@training.usernaming.type.integration.connector' ]
+        tags:
+            - { name: console.command }

@@ -40,7 +40,9 @@ class UserNamingTypeController extends AbstractController
     public function deleteAction(UserNamingType $type)
     {
         $doctrine = $this->container->get('doctrine');
-        $doctrine->getManager()->remove($type);
+        $em = $doctrine->getManager();
+        $em->remove($type);
+        $em->flush();
         return new Response('', Response::HTTP_OK);
     }
 

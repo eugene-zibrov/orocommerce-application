@@ -2,6 +2,7 @@
 
 namespace Training\Bundle\UserNamingBundle\Entity;
 
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
@@ -10,6 +11,7 @@ use Training\Bundle\UserNamingBundle\Model\ExtendUserNamingType;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="user_naming_type")
+ * @ORM\HasLifecycleCallbacks()
  * @Config(
  *      routeName="training_user_naming_index",
  *      routeView="training_user_naming_show",

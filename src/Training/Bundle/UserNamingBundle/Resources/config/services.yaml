@@ -34,3 +34,14 @@ services:
       - { name: twig.extension }
 
   Oro\Bundle\LocaleBundle\Provider\EntityNameProvider: '@oro_locale.entity_name_provider'
+
+  training.usernaming.example.format:
+    public: true
+    class: Training\Bundle\UserNamingBundle\Service\TrainingNamingConverterExample
+
+  Training\Bundle\UserNamingBundle\EventListener\UserNamingTypeChangeFormatListener:
+    calls:
+      - setContainer: [ '@service_container' ]
+    tags:
+      - { name: 'doctrine.event_listener', event: 'postPersist', entity: Training\Bundle\UserNamingBundle\Entity\UserNamingType }
+      - { name: 'doctrine.event_listener', event: 'preUpdate', entity: Training\Bundle\UserNamingBundle\Entity\UserNamingType }
