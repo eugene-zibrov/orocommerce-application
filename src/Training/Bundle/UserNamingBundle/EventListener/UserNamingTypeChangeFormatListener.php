@@ -18,18 +18,23 @@ class UserNamingTypeChangeFormatListener implements ContainerAwareInterface
      * @param UserNamingType $namingType
      * @param LifecycleEventArgs $event
      */
-    public function postPersist(UserNamingType $namingType, LifecycleEventArgs $event)
+    public function postPersist(LifecycleEventArgs $event)
     {
-        $this->sendMessage($namingType);
+        $namingType = $event->getEntity();
+        if ($namingType instanceof UserNamingType) {
+            $this->sendMessage($namingType);
+        }
     }
 
     /**
      * @param UserNamingType $namingType
      * @param PreUpdateEventArgs $event
      */
-    public function preUpdate(UserNamingType $namingType, PreUpdateEventArgs $event)
+    public function preUpdate(PreUpdateEventArgs $event)
     {
-        if ($event->hasChangedField('format')) {
+        /** @var UserNamingType $namingType */
+        $namingType = $event->getEntity();
+        if ($namingType instanceof UserNamingType && $event->hasChangedField('format')) {
             $this->sendMessage($namingType);
         }
     }
