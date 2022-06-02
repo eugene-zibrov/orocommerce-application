@@ -1,0 +1,16 @@
+Training\Bundle\UserNamingBundle\Entity\UserNamingType:
+    properties:
+        title:
+            - NotNull: ~
+            - Length:
+                max: 255
+        format:
+            - NotNull: ~
+            - Length:
+                max: 255
+        example:
+            - NotNull: ~
+            - Length:
+                max: 255
+        enabled:
+            - NotNull: ~

@@ -1,0 +1,48 @@
+ {% extends '@OroUI/actions/update.html.twig' %}
+{% import '@OroUI/macros.html.twig' as UI %}
+ {% form_theme form with '@OroForm/Form/fields.html.twig' %}
+{% set pageTitle = 'training.usernaming.entity_plural_label'|trans %}
+
+ {% set entity = form.vars.value %}
+
+ {% block navButtons %}
+     {{ UI.cancelButton(path('training_user_naming_index')) }}
+
+     {{ UI.dropdownSaveButton({
+         'html': UI.saveAndCloseButton() ~ UI.saveAndStayButton()
+     }) }}
+ {% endblock navButtons %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+        'entity': entity,
+        'indexPath': path('training_user_naming_index'),
+        'indexLabel': 'training.usernaming.entity_plural_label'|trans,
+        'entityTitle': 'training.usernaming.entity_plural_label'|trans ~ entity.id
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{% block content_data %}
+     {% set id = 'task-edit' %}
+     {% set dataBlocks = [{
+         'title': 'General'|trans,
+         'class': 'active',
+         'subblocks': [{
+         'title': '',
+         'data': [
+             form_row(form.title),
+             form_row(form.example),
+             form_row(form.format),
+             form_row(form.enabled),
+         ]
+     }]
+     }]
+     %}
+     {% set data = {
+         'formErrors': form_errors(form) ? form_errors(form) : null,
+         'dataBlocks': dataBlocks,
+     } %}
+
+     {{ parent() }}
+ {% endblock content_data %}
